@@ -17,19 +17,18 @@
 
     <dependencies>
 
-       
         <!-- Jersey Apache Connectors for Proxy connections -->
         <dependency>
             <groupId>org.glassfish.jersey.connectors</groupId>
             <artifactId>jersey-apache-connector</artifactId>
         </dependency>
 
-       <!-- JEE 7 -->
-            <dependency>
-                <groupId>javax</groupId>
-                <artifactId>javaee-api</artifactId>
-                <scope>provided</scope>
-            </dependency>
+        <!-- JEE 7 -->
+        <dependency>
+            <groupId>javax</groupId>
+            <artifactId>javaee-api</artifactId>
+            <scope>provided</scope>
+        </dependency>
      
         <!-- Hystrix 
         <dependency>
@@ -40,12 +39,12 @@
             <groupId>com.netflix.hystrix</groupId>
             <artifactId>hystrix-servo-metrics-publisher</artifactId>
         </dependency>-->
-        <!-- Swagger -->
+
         <dependency>
-            <groupId>io.swagger</groupId>
-            <artifactId>swagger-annotations</artifactId>
-            <version>1.5.21</version>
+            <groupId>io.swagger.core.v3</groupId>
+            <artifactId>swagger-jaxrs2</artifactId>
         </dependency>
+
         <dependency>
             <groupId>com.fasterxml.jackson.jaxrs</groupId>
             <artifactId>jackson-jaxrs-json-provider</artifactId>
@@ -163,46 +162,6 @@
                     </execution>
                 </executions>
             </plugin>
-            <plugin>
-                <groupId>com.github.kongchen</groupId>
-                <artifactId>swagger-maven-plugin</artifactId>
-                <configuration>
-                    <apiSources>
-                        <apiSource>
-                            <springmvc>false</springmvc>
-                            <locations>
-                                <location>${project.groupId}.api.login.v1.boundary</location>
-                            </locations>
-                            <schemes>
-                                <scheme>https</scheme>
-                            </schemes>
-                            <jsonExampleValues>true</jsonExampleValues>
-                            <info>
-                                <title>GCDM Authenticate API</title>
-                                <version>1.0.0</version>
-                                <description>GCDM Authenticate API</description>
-                                <contact>
-                                    <name></name>
-                                    <url></url>
-                                    <email></email>
-                                </contact>
-                            </info>
-                            <basePath>/</basePath>
-                            <swaggerDirectory>${basedir}/src/main/webapp/apidoc/spec</swaggerDirectory>
-                            <outputFormats>json</outputFormats>
-                        </apiSource>
-                    </apiSources>
-                </configuration>
-                <executions>
-                    <execution>
-                        <phase>compile</phase>
-                        <goals>
-                            <goal>generate</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-
       </plugins>
             
     </build>

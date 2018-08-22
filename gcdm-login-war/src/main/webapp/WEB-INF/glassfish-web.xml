@@ -3,6 +3,9 @@
         "http://glassfish.org/dtds/glassfish-web-app_3_0-1.dtd">
 <glassfish-web-app>
 
-    <context-root></context-root>
+    <!-- Add this to force server to load libraries first from app then from server modules-->
+    <class-loader delegate="false"/>
+
+    <context-root>/</context-root>
 
 </glassfish-web-app>

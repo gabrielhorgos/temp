@@ -1,9 +1,7 @@
 package com.bmw.gcdm.api.login.v5.entity;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
  * This class represents a BE (business entity) for the BC (business component)
@@ -11,37 +9,36 @@ import io.swagger.annotations.ApiModelProperty;
  *
  * @author qxk9919
  */
-
-@ApiModel(value = "Authentication", description = "An authentication object that contains the user credentials.")
+@Schema(name = "Authentication", description = "An authentication object that contains the user credentials.")
 public class Authentication {
 
-	private String loginId;
+    private String loginId;
 
-	/**
-	 * The default constructor.
-	 */
-	public Authentication() {
-		super();
-	}
+    /**
+     * The default constructor.
+     */
+    public Authentication() {
+        super();
+    }
 
-	/**
-	 * LoginId: one of mail, mobile, alias or gcid
-	 *
-	 * @return loginId
-	 */
-	@ApiModelProperty(value = "The loginId", example = "\"mail@mail.de\"", required = true)
-	@JsonProperty(value = "loginId", required = true)
-	public String getLoginId() {
-		return loginId;
-	}
+    /**
+     * LoginId: one of mail, mobile, alias or gcid
+     *
+     * @return loginId
+     */
+    @Schema(name = "The loginId", example = "\"mail@mail.de\"", required = true)
+    @JsonProperty(value = "loginId", required = true)
+    public String getLoginId() {
+        return loginId;
+    }
 
-	/**
-	 * Set the loginId
-	 *
-	 * @param mail, mobile, alias or gcid
-	 */
-	public void setLoginId(final String loginId) {
-		this.loginId = loginId;
-	}
+    /**
+     * Set the loginId
+     *
+     * @param mail, mobile, alias or gcid
+     */
+    public void setLoginId(final String loginId) {
+        this.loginId = loginId;
+    }
 
 }

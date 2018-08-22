@@ -1,9 +1,7 @@
 package com.bmw.gcdm.api.login.v5.entity;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
  * This class represents a BE (business entity) for the BC (business component)
@@ -11,9 +9,7 @@ import io.swagger.annotations.ApiModelProperty;
  *
  * @author qxk9919
  */
-
-@ApiModel(value = "Session",
-		description = "A gcdm session object is returned for the authenticated user. It contains the Gcdm Token.")
+@Schema(name = "Session", description = "A gcdm session object is returned for the authenticated user. It contains the Gcdm Token.")
 public class Session {
 
 	private String gcdmAuthenticationToken;
@@ -30,7 +26,7 @@ public class Session {
 	 *
 	 * @return gcdmAuthenticationToken
 	 */
-	@ApiModelProperty(value = "The Gcdm Token", example = "\"ey....\"", required = true)
+	@Schema(name = "The Gcdm Token", example = "\"ey....\"", required = true)
 	@JsonProperty(value = "gcdmAuthenticationToken", required = true)
 	public String getGcdmAuthenticationToken() {
 		return gcdmAuthenticationToken;
