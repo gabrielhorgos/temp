@@ -1,0 +1,11 @@
+{
+  "swagger" : "2.0",
+  "info" : {
+    "description" : "GCDM Authenticate API",
+    "version" : "1.0.0",
+    "title" : "GCDM Authenticate API",
+    "contact" : { }
+  },
+  "basePath" : "/",
+  "schemes" : [ "https" ]
+}

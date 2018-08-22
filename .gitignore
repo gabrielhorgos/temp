@@ -1,0 +1,27 @@
+# See http://help.github.com/ignore-files/ for more about ignoring files.
+
+# IDEs and editors
+/.idea
+**/*.iml
+**/.project
+**/.classpath
+.c9/
+*.launch
+**/.settings/
+*.sublime-workspace
+
+# misc
+/connect.lock
+/coverage/*
+/libpeerconnection.log
+derby.log
+config.log
+
+#System Files
+.DS_Store
+Thumbs.db
+
+# Maven targets
+**/target/
+
+**/domaindir/*

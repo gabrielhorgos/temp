@@ -1,0 +1,302 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>gcdm-login</artifactId>
+    <groupId>com.bmw.gcdm</groupId>
+    <version>1.0.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+
+    <name>${project.artifactId} ${project.version}</name>
+    
+    <modules>
+        <module>gcdm-login-war</module>
+        <!-- <module>gcdm-login-v1-integrationtest</module> -->
+    </modules>
+
+   
+
+    <!-- Release Management -->
+    <scm>
+        <developerConnection>scm:git:https://atc.bmwgroup.net/bitbucket/scm/gcdm/gcdm-login.git
+        </developerConnection>
+    </scm>
+
+    <!-- Distribution Management -->
+    <distributionManagement>
+        <repository>
+            <id>proj-releases</id>
+            <url>${repository.proj-releases.url}</url>
+        </repository>
+        <snapshotRepository>
+            <id>proj-snapshots</id>
+            <url>${repository.proj-snapshots.url}</url>
+        </snapshotRepository>
+    </distributionManagement>
+
+
+    <properties>
+        <!-- do not modify the following values -->
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <!-- only run unit test by default, will be override by profiles -->
+        <skipTests>false</skipTests>
+        <skipITs>true</skipITs>
+        <skipLTandPTs>true</skipLTandPTs>
+
+        <!-- generated files or file belonging to a tool like swagger UI can be excluded -->
+        <sonar.exclusions>**/gen/**.java,**/generated-sources/**.java,src/main/webapp/apidoc/**.*</sonar.exclusions>
+
+        <!-- JEE -->
+        <javax.javaee-api.version>7.0</javax.javaee-api.version>
+      
+        <!-- REST API -->
+        <org.glassfish.jersey.version>2.27</org.glassfish.jersey.version>
+        <com.fasterxml.jackson.version>2.9.5</com.fasterxml.jackson.version>
+        <io.swagger.version>1.5.10</io.swagger.version>
+
+        <!-- Resilience -->
+        <com.netflix.hystrix.version>1.5.13</com.netflix.hystrix.version>
+
+        <!-- Test -->
+        <junit.version>4.12</junit.version>
+        <mockito.version>2.19.0</mockito.version>
+
+    </properties>
+
+    <build>
+        <defaultGoal>clean verify</defaultGoal>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <!--automatically inherited compile goal plugin -->
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>3.7.0</version>
+                    <configuration>
+                        <source>1.8</source>
+                        <target>1.8</target>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-dependency-plugin</artifactId>
+                    <version>3.0.1</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-javadoc-plugin</artifactId>
+                    <version>2.10.4</version>
+                    <configuration>
+                        <failOnError>false</failOnError>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>properties-maven-plugin</artifactId>
+                    <version>1.0.0</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>build-helper-maven-plugin</artifactId>
+                    <version>3.0.0</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-war-plugin</artifactId>
+                    <version>3.2.2</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-jar-plugin</artifactId>
+                    <version>3.1.0</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-deploy-plugin</artifactId>
+                    <version>2.8.2</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-enforcer-plugin</artifactId>
+                    <version>1.4.1</version>
+                </plugin>
+                <!-- Tests -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-surefire-plugin</artifactId>
+                    <version>2.22.0</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.jacoco</groupId>
+                    <artifactId>jacoco-maven-plugin</artifactId>
+                    <version>0.8.1</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-resources-plugin</artifactId>
+                    <version>3.1.0</version>
+                    <configuration>
+                        <addDefaultExcludes>false</addDefaultExcludes>
+                    </configuration>
+                </plugin>
+                <!-- Swagger -->
+                <plugin>
+                    <groupId>com.github.kongchen</groupId>
+                    <artifactId>swagger-maven-plugin</artifactId>
+                    <version>3.1.7</version>
+                </plugin>
+                <plugin>
+                    <groupId>io.swagger</groupId>
+                    <artifactId>swagger-codegen-maven-plugin</artifactId>
+                    <version>2.3.1</version>
+                </plugin>
+                
+                <!-- Eclipse Integration -->
+                <plugin>
+                    <groupId>org.eclipse.m2e</groupId>
+                    <artifactId>lifecycle-mapping</artifactId>
+                    <version>1.0.0</version>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
+
+    <dependencyManagement>
+        <dependencies>
+            <!-- Application modules -->
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>gcdm-login-war</artifactId>
+                <version>${project.version}</version>
+                <type>war</type>
+            </dependency>
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>gcdm-login-war</artifactId>
+                <version>${project.version}</version>
+                <type>pom</type>
+            </dependency>
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>gcdm-login-v1-integrationtest</artifactId>
+                <version>${project.version}</version>
+                <type>jar</type>
+            </dependency>
+
+            <!-- EXTERNAL LIBRARIES -->
+            <!-- JEE 7 -->
+            <dependency>
+                <groupId>javax</groupId>
+                <artifactId>javaee-api</artifactId>
+                <version>${javax.javaee-api.version}</version>
+                <scope>provided</scope>
+            </dependency>
+
+            <!-- Jersey Apache Connectors for Proxy connections -->
+            <dependency>
+                <groupId>org.glassfish.jersey.connectors</groupId>
+                <artifactId>jersey-apache-connector</artifactId>
+                <version>${org.glassfish.jersey.version}</version>
+                <exclusions>
+                    <!-- Following dependencies are provided by glassfish-embedded-all -->
+                    <exclusion>
+                        <groupId>org.glassfish.jersey.core</groupId>
+                        <artifactId>jersey-common</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>org.glassfish.jersey.core</groupId>
+                        <artifactId>jersey-client</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+
+            <!-- Hystrix -->
+            <dependency>
+                <groupId>com.netflix.hystrix</groupId>
+                <artifactId>hystrix-core</artifactId>
+                <version>${com.netflix.hystrix.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.netflix.hystrix</groupId>
+                <artifactId>hystrix-servo-metrics-publisher</artifactId>
+                <version>${com.netflix.hystrix.version}</version>
+            </dependency>
+
+            <!-- Jackson -->
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-core</artifactId>
+                <version>${com.fasterxml.jackson.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-annotations</artifactId>
+                <version>${com.fasterxml.jackson.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-databind</artifactId>
+                <version>${com.fasterxml.jackson.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.fasterxml.jackson.jaxrs</groupId>
+                <artifactId>jackson-jaxrs-base</artifactId>
+                <version>${com.fasterxml.jackson.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.fasterxml.jackson.jaxrs</groupId>
+                <artifactId>jackson-jaxrs-json-provider</artifactId>
+                <version>${com.fasterxml.jackson.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.fasterxml.jackson.dataformat</groupId>
+                <artifactId>jackson-dataformat-xml</artifactId>
+                <version>${com.fasterxml.jackson.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.fasterxml.jackson.datatype</groupId>
+                <artifactId>jackson-datatype-jsr310</artifactId>
+                <version>${com.fasterxml.jackson.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.fasterxml.jackson.datatype</groupId>
+                <artifactId>jackson-datatype-joda</artifactId>
+                <version>${com.fasterxml.jackson.version}</version>
+            </dependency>
+            
+            <!-- GCDM Token Generation/Validation -->
+            <dependency>
+                <groupId>com.nimbusds</groupId>
+                <artifactId>nimbus-jose-jwt</artifactId>
+                <version>5.1</version>
+                <scope>provided</scope>
+            </dependency>
+            <dependency>
+                <groupId>at.tugraz.iaik</groupId>
+                <artifactId>iaik_jce_full</artifactId>
+                <version>3.13</version>
+            </dependency>
+            
+            <!-- TEST -->
+            <dependency>
+                <groupId>junit</groupId>
+                <artifactId>junit</artifactId>
+                <version>${junit.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.mockito</groupId>
+                <artifactId>mockito-core</artifactId>
+                <version>${mockito.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>me.qoomon</groupId>
+                <artifactId>maven-git-versioning-extension</artifactId>
+                   <version>LATEST</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+</project>
